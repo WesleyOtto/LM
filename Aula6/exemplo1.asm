@@ -13,14 +13,14 @@ global _start
 _start:
 
         mov eax,11
-        mov ebx,11
+        mov ebx,15
         cmp eax,ebx
         je lequ
 
-ldiff:  mov ecx,msgne
+ldiff:  mov ecx,msgne ;Else
         jmp lmsg
 
-lequ:   mov ecx,msge
+lequ:   mov ecx,msge; then
 
 lmsg:   mov edx,11  ;string lenght
         mov ebx,1   ;where to writem screen
