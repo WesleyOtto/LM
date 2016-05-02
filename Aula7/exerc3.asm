@@ -5,19 +5,13 @@
 
 SECTION .data ; data section
 
-
-ladoA:      DB  5
-ladoB:      DB  5
-ladoC:      DB  5
+ladoA:      DB  1
+ladoB:      DB  2
+ladoC:      DB  3
 erro:       DB  "Nao forma triangulo  ", 21
 equilatero: DB  "Triangulo equilatero  ", 22
 isosceles:  DB  "Triangulo isosceles  ", 21
 escaleno:   DB  "Triangulo escaleno  ", 20
-
-erro_len equ $ - erro
-equilatero_len equ $ - equilatero
-isosceles_len equ $ - isosceles
-escaleno_len equ $ - escaleno
 
 SECTION .text
 
@@ -47,30 +41,34 @@ _start:
       cmp al, bl
       ja lerro
 
+      ;(cmp A COM C )
       mov bl, [ladoA]
       cmp al, bl
       je eq_iso
 
-lescaleno: mov bl, [ladoB]
+;         cmp   B com C
+
+lescaleno: mov al,[ladoC]
+           mov bl,[ladoB]
            cmp al, bl
            je lisosceles
            mov ecx, escaleno
-           mov edx, escaleno_len
+           mov edx, 20
            jmp fim
 
 eq_iso: mov bl, [ladoB]
         cmp al, bl
         jne lisosceles
         mov ecx, equilatero
-        mov edx, equilatero_len
+        mov edx, 22
         jmp fim
 
 lisosceles: mov ecx, isosceles
-            mov edx, isosceles_len
+            mov edx, 21
             jmp fim
 
 lerro: mov ecx, erro
-       mov edx, erro_len
+       mov edx, 21
 
 fim:    mov ebx,1       ;arg1, where to write , screen
         mov eax,4       ;write sysout command to int 80 hex
