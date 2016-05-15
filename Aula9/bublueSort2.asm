@@ -50,13 +50,17 @@ loop_i:   dec ecx ;
             inc edx
             mov ax,[array+EDX] ; ax[j+1]
             cmp bx,ax
-            ja swap
+            ja swap , ;bx[j] > ax[j+1]
 
 
 swap:
+            mov [array+EDX],bx ; ax[j+1] = bx[j]
+            dec edx
+            mov [array+EDX],ax ; bx[j] = ax[j+1]
 
+            jmp lopp_j
 
 fim:
-
+        mov ebx,array
         mov eax,1   ;exit command to kernel
         int 0x80    ;interrupt 80hex, call kermel
